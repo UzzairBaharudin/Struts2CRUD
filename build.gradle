@@ -1,0 +1,40 @@
+apply plugin: 'base'
+apply plugin: 'java'
+apply plugin: 'eclipse' 
+apply plugin: 'war'                                
+ 
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+configurations {
+   provided
+}
+
+sourceSets {
+  main { compileClasspath += configurations.provided }
+  test { runtimeClasspath += configurations.provided }
+}
+
+eclipse.classpath.plusConfigurations += configurations.provided
+ 
+repositories {
+    mavenCentral()
+}
+ 
+dependencies {
+    // struts 2
+    compile group:'org.apache.struts',name:'struts2-core', version: '2.3.16.3+'
+}
+
+void moveJarIntoLib(File file){
+    println 'Added jar ' + file
+        copy{
+            from file
+            into 'lib'
+        }
+}
+
+task copyJarDependencies(type: Copy) {
+    description = 'Used for Eclipse. Copies all dependency jar files to the lib directory.'
+    println 'Adding dependencies from compile configuration'
+    configurations.compile.filter {it.name.endsWith 'jar'}.each { File file -> moveJarIntoLib(file)}
+}
