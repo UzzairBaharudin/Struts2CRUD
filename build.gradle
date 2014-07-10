@@ -1,8 +1,12 @@
 apply plugin: 'base'
 apply plugin: 'java'
 apply plugin: 'eclipse' 
-apply plugin: 'war'                                
- 
+apply plugin: 'war'
+
+task hello << {
+    println delegate.class.name
+}
+
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 configurations {
