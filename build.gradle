@@ -3,11 +3,9 @@ apply plugin: 'java'
 apply plugin: 'eclipse' 
 apply plugin: 'war'
 
-task hello << {
-    println delegate.class.name
-}
-
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+//tasks.withType(Compile){
+//    options.encoding='UTF-8'
+//}
 
 configurations {
    provided
@@ -44,4 +42,8 @@ task copyJarDependencies(type: Copy) {
     description = 'Used for Eclipse. Copies all dependency jar files to the lib directory.'
     println 'Adding dependencies from compile configuration'
     configurations.compile.filter {it.name.endsWith 'jar'}.each { File file -> moveJarIntoLib(file)}
+}
+
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.0'
 }
