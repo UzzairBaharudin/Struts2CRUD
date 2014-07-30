@@ -46,6 +46,7 @@ build.dependsOn(copyJarDependencies)
 
 war {
 	from 'WebContent'
+	destinationDir = file("$buildDir/dist")
 }
 
 task wrapper(type: Wrapper) {
