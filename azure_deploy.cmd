@@ -1,4 +1,4 @@
-SET GRADLE_HOME=%~dp0%\gradle
+SET GRADLE_HOME=%~dp0%gradle
 SET GRADLEW_CMD=gradlew.bat
 
 setlocal enabledelayedexpansion
