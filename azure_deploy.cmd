@@ -1,5 +1,5 @@
 SET GRADLE_HOME=%~dp0%gradle
-SET GRADLEW_CMD=gradlew.bat
+SET GRADLE_CMD=gradlew.bat
 
 setlocal enabledelayedexpansion
 
@@ -11,7 +11,7 @@ IF NOT DEFINED DEPLOYMENT_TARGET (
   SET DEPLOYMENT_TARGET=%~dp0%\..\wwwroot
 )
 
-IF EXIST "%GRADLEW_CMD%" (
+IF EXIST "%GRADLE_CMD%" (
   call :ExecuteCmd "%GRADLE_CMD%" clean war
   IF !ERRORLEVEL! NEQ 0 goto error
 )
