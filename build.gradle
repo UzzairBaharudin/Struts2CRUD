@@ -1,16 +1,23 @@
 apply plugin: 'base'
 apply plugin: 'java'
+apply plugin: 'eclipse-wtp'
 apply plugin: 'war'
 
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.0'
+}
+
+project.webAppDirName = 'WebContent'
+
 sourceSets {
-  main { 
-  	java {
-    	srcDir 'src'
+    main {
+        java { srcDir 'src' }
+        resources { srcDir 'src' }
     }
-    resources{
-    	srcDir 'src'
-    }
-  }
+}
+
+war {
+	destinationDir = file("$buildDir/dist")
 }
 
 repositories {
@@ -27,28 +34,3 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
-void moveJarIntoLib(File file){
-    println 'Added jar ' + file
-        copy{
-            from file
-            into 'lib'
-        }
-}
-
-task copyJarDependencies(type: Copy) {
-    description = 'Used for Eclipse. Copies all dependency jar files to the lib directory.'
-}
-copyJarDependencies << {
-	println 'Adding dependencies from compile configuration'
-	configurations.compile.filter {it.name.endsWith 'jar'}.each { File file -> moveJarIntoLib(file)}
-}
-build.dependsOn(copyJarDependencies)
-
-war {
-	from 'WebContent'
-	destinationDir = file("$buildDir/dist")
-}
-
-task wrapper(type: Wrapper) {
-	gradleVersion = '2.0'
-}
