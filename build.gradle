@@ -18,6 +18,7 @@ sourceSets {
 
 war {
 	destinationDir = file("$buildDir/dist")
+    archiveName = "Struts2CRUD.war"
 }
 
 eclipse {
