@@ -1,23 +1,18 @@
 apply plugin: 'base'
 apply plugin: 'java'
-apply plugin: 'eclipse' 
 apply plugin: 'war'
 
-//tasks.withType(Compile){
-//    options.encoding='UTF-8'
-//}
-
-configurations {
-   provided
-}
-
 sourceSets {
-  main { compileClasspath += configurations.provided }
-  test { runtimeClasspath += configurations.provided }
+  main { 
+  	java {
+    	srcDir 'src'
+    }
+    resources{
+    	srcDir 'src'
+    }
+  }
 }
 
-eclipse.classpath.plusConfigurations += configurations.provided
- 
 repositories {
     mavenCentral()
 }
@@ -28,6 +23,8 @@ dependencies {
     // log
     compile 'commons-logging:commons-logging:1.1.3'
     compile 'commons-logging:commons-logging-api:1.1'
+    // test
+    testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 
 void moveJarIntoLib(File file){
@@ -40,8 +37,15 @@ void moveJarIntoLib(File file){
 
 task copyJarDependencies(type: Copy) {
     description = 'Used for Eclipse. Copies all dependency jar files to the lib directory.'
-    println 'Adding dependencies from compile configuration'
-    configurations.compile.filter {it.name.endsWith 'jar'}.each { File file -> moveJarIntoLib(file)}
+}
+copyJarDependencies << {
+	println 'Adding dependencies from compile configuration'
+	configurations.compile.filter {it.name.endsWith 'jar'}.each { File file -> moveJarIntoLib(file)}
+}
+build.dependsOn(copyJarDependencies)
+
+war {
+	from 'WebContent'
 }
 
 task wrapper(type: Wrapper) {
