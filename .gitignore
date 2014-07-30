@@ -4,3 +4,7 @@ lib/
 /.nb-gradle/private/
 .nb-gradle/
 .idea/libraries/
+bin/
+.settings/
+.classpath
+.project
