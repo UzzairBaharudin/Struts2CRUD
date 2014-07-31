@@ -31,7 +31,7 @@ test {
         // set JVM arguments for the test JVM(s)
         jvmArgs '-Djava.net.preferIPv4Stack=true'
 
-        //println environment
+        include "**/*Test.class" 
 
         testLogging.showStandardStreams = true
 
