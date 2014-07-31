@@ -19,8 +19,26 @@ public class EmployeeAction extends ActionSupport implements Preparable {
 	private DepartmentService deptService = new DefaultDepartmentService();
 
 	private Employee employee;
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	private List<Employee> employees;
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
 	private List<?> departments;
+
+	public List<?> getDepartments() {
+		return departments;
+	}
 
 	/**
 	 * Loads employee data in case of editing, and loads departments in any
@@ -65,22 +83,6 @@ public class EmployeeAction extends ActionSupport implements Preparable {
 	public String list() {
 		employees = empService.getAllEmployees();
 		return SUCCESS;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-
-	public List<Employee> getEmployees() {
-		return employees;
-	}
-
-	public List<?> getDepartments() {
-		return departments;
 	}
 
 }
