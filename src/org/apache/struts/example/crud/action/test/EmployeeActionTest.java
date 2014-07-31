@@ -13,10 +13,12 @@ import org.apache.struts.example.crud.model.Employee;
 
 public class EmployeeActionTest {
 
-//	@Test
-//	public void testSave() {
-//		fail("Not yet implemented");
-//	}
+	/*
+	@Test
+	public void testSave() {
+		fail("Not yet implemented");
+	}
+	*/
 
 	@Test
 	public void testDelete() {
