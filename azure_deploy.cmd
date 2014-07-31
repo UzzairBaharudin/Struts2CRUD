@@ -14,7 +14,7 @@ IF NOT DEFINED DEPLOYMENT_TARGET (
 )
 
 IF EXIST "%GRADLE_CMD%" (
-  call :ExecuteCmd "%GRADLE_CMD%" clean test war --info
+  call :ExecuteCmd "%GRADLE_CMD%" clean test war --debug 
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
@@ -32,7 +32,7 @@ goto end
 setlocal
 set _CMD_=%*
 call %_CMD_%
-if "%ERRORLEVEL%" NEQ "0" echo Failed exitCode=%ERRORLEVEL%, command=%_CMD_%
+:: if "%ERRORLEVEL%" NEQ "0" echo Failed exitCode=%ERRORLEVEL%, command=%_CMD_%
 exit /b %ERRORLEVEL%
 
 :error
