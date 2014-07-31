@@ -26,7 +26,7 @@ sourceSets {
 }
 
 test {
-        //systemProperties = System.properties
+        systemProperties = System.properties
 
         // set JVM arguments for the test JVM(s)
         jvmArgs '-Djava.net.preferIPv4Stack=true'
