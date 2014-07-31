@@ -27,6 +27,10 @@ sourceSets {
 
 test {
         systemProperties = System.properties
+
+        // set JVM arguments for the test JVM(s)
+        jvmArgs '-Djava.net.preferIPv4Stack=true'
+
         testLogging.showStandardStreams = true
 
         beforeTest { descriptor ->
