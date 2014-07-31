@@ -1,3 +1,4 @@
+SET JAVA_HOME="D:\Program Files (x86)\Java\jdk1.7.0_51"
 SET GRADLE_OPTS="-Djava.net.preferIPv4Stack=true"
 SET GRADLE_HOME=%~dp0%gradle
 SET GRADLE_USER_HOME=%GRADLE_HOME%
@@ -14,7 +15,7 @@ IF NOT DEFINED DEPLOYMENT_TARGET (
 )
 
 IF EXIST "%GRADLE_CMD%" (
-  call :ExecuteCmd "%GRADLE_CMD%" build --debug
+  call :ExecuteCmd "%GRADLE_CMD%" clean test war --info
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
