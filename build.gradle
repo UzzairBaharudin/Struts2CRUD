@@ -26,11 +26,11 @@ sourceSets {
 }
 
 test {
-        debug = false
+        //debug = false
         systemProperties = System.properties
 
         // set JVM arguments for the test JVM(s)
-        jvmArgs '-Djava.net.preferIPv4Stack=true'
+        //jvmArgs '-Djava.net.preferIPv4Stack=true'
 
         //include "**/*Test.class" 
 
