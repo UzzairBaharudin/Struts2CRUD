@@ -1,0 +1,50 @@
+void moveJarIntoLib(File file, String postfix, String libDir='lib'){
+    println 'copy "' + file + '"'
+    copy{
+            from file
+            into libDir + '/' + postfix
+    }
+}
+
+task copyLibDep<< {
+    description = 'Used for Eclipse. Copies all dependency jar files to the lib directory.'
+    println 'Adding dependencies from compile configuration'
+    configurations.runtime.each { File file -> moveJarIntoLib(file,'runtime')}
+    configurations.testRuntime.each { File file -> moveJarIntoLib(file,'test')}
+}
+
+task showDeps << {
+
+	def compileDepList = []
+	configurations.compile.each { 
+  	    compileDepList.add(it)
+  	}
+	println "\ncompile time dependencies:\n==="
+ 	compileDepList.each { println it }
+  	println "===\n"
+
+  	def runtimeDepList = []
+  	configurations.runtime.each { 
+  		runtimeDepList.add(it)
+  	}
+	println "\nruntime dependencies:\n==="
+ 	runtimeDepList.each { println it }
+  	println "===\n"
+
+  	def testCompDepList = []
+	configurations.testCompile.each { 
+  		testCompDepList.add(it)
+  	}
+  	println "\ntest compile dependencies:\n==="
+ 	testCompDepList.each { println it }
+  	println "===\n"
+
+  	
+  	def testRunDepList = []
+  	configurations.testRuntime.each {
+  		testRunDepList.add(it)
+  	}
+  	println "\ntest runtime dependencies:\n==="
+ 	testRunDepList.each { println it}
+  	println "==="  	
+}
