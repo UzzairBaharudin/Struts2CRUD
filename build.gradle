@@ -48,6 +48,32 @@ war {
 
 eclipse {
 
+	project {
+        file {
+            withXml { xmlProvider ->
+				
+				//hide grade, grade_cache, build folder in eclipse project view
+
+				Node projectXml = xmlProvider.asNode()
+                Node filter = projectXml.appendNode('filteredResources').appendNode('filter')
+                filter.appendNode('id', 1407148197090)
+                filter.appendNode('name')
+                filter.appendNode('type', 10)
+                Node matcher = filter.appendNode('matcher')
+                matcher.appendNode('id', 'org.eclipse.ui.ide.orFilterMatcher')
+                Node arguments = matcher.appendNode('arguments')
+                
+                Node innerMatcher1 = arguments.appendNode('matcher')
+                innerMatcher1.appendNode('id','org.eclipse.ui.ide.multiFilter')
+                innerMatcher1.appendNode('arguments','1.0-name-matches-false-false-gradle*')
+
+                Node innerMatcher2 = arguments.appendNode('matcher')
+                innerMatcher2.appendNode('id','org.eclipse.ui.ide.multiFilter')
+                innerMatcher2.appendNode('arguments','1.0-name-matches-false-false-build*')
+            }
+        }
+    }
+
 	jdt {
 		sourceCompatibility = 1.7
 		targetCompatibility = 1.7
@@ -71,6 +97,9 @@ eclipse {
                         = new org.gradle.plugins.ide.eclipse.model.Container('org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0')
     			classpath.entries << tomcatRuntimeContainer
     		}
+    		whenMerged { classpath ->
+        		classpath.entries.findAll { entry -> entry.kind == 'lib' && entry.path.contains('junit') }*.exported = false
+    		}
     	}
     }
 }
@@ -86,8 +115,6 @@ dependencies {
     // log
     compile 'commons-logging:commons-logging:1.1.3'
     compile 'commons-logging:commons-logging-api:1.1'
-
-    runtime 'org.apache.logging.log4j:log4j-core:2.0'
 
     // test
     testCompile 'junit:junit:[4,)'
