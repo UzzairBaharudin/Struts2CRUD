@@ -2,6 +2,7 @@ apply plugin: 'base'
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'war'
+apply from : 'depLibUtil.gradle'
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.0'
@@ -15,7 +16,10 @@ sourceSets {
             srcDir 'src'
             exclude '**/test/**'
          }
-        resources { srcDir 'src' }
+        resources {
+         	srcDir 'src'
+         	exclude '**/test/**' 
+     	}
     }
     test {
         java {
@@ -38,6 +42,7 @@ test {
             exceptionFormat = 'full'
             showStandardStreams = true
         }
+        //println jvmArgs
 }
 
 

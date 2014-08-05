@@ -1,6 +1,4 @@
 SET GRADLE_OPTS="-Djava.net.preferIPv4Stack=true"
-SET GRADLE_HOME=%~dp0%gradle
-SET GRADLE_USER_HOME=%GRADLE_HOME%
 SET GRADLE_CMD=gradlew.bat
 
 setlocal enabledelayedexpansion
@@ -14,7 +12,7 @@ IF NOT DEFINED DEPLOYMENT_TARGET (
 )
 
 IF EXIST "%GRADLE_CMD%" (
-  call :ExecuteCmd "%GRADLE_CMD%" war --info
+  call :ExecuteCmd "%GRADLE_CMD%" test war -S -d
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
