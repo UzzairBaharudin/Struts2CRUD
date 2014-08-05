@@ -30,6 +30,7 @@ sourceSets {
 }
 
 test {
+		useJUnit()
         //debug = false
         systemProperties = System.properties
 
@@ -39,8 +40,15 @@ test {
         //include "**/*Test.class" 
 
         testLogging {
+
             exceptionFormat = 'full'
             showStandardStreams = true
+            showStackTraces = true
+            showCauses = true
+            showExceptions = true
+            debug {
+            	exceptionFormat = 'full'
+            }
         }
 }
 
