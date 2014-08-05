@@ -1,4 +1,6 @@
 SET GRADLE_OPTS="-Djava.net.preferIPv4Stack=true"
+SET GRADLE_HOME=%~dp0%gradle_cache
+SET GRADLE_USER_HOME=%GRADLE_HOME%
 SET GRADLE_CMD=gradlew.bat
 
 setlocal enabledelayedexpansion
