@@ -14,7 +14,7 @@ IF NOT DEFINED DEPLOYMENT_TARGET (
 )
 
 IF EXIST "%GRADLE_CMD%" (
-  call :ExecuteCmd "%GRADLE_CMD%" test war -S -d
+  call :ExecuteCmd "%GRADLE_CMD%" war
   IF !ERRORLEVEL! NEQ 0 goto error
 )
 
