@@ -23,7 +23,7 @@ sourceSets {
     }
     test {
         java {
-            srcDir 'src'    
+            include '**/test/**'    
         }
         
     }
@@ -36,8 +36,6 @@ test {
 
         // set JVM arguments for the test JVM(s)
         jvmArgs '-Djava.net.preferIPv4Stack=true'
-
-        //include "**/*Test.class" 
 
         testLogging {
 
@@ -59,8 +57,9 @@ war {
 }
 
 eclipse {
-
 	project {
+        name = 'Struts2CRUD'
+        comment = "A Struts2 CRUD demo project"
         file {
             withXml { xmlProvider ->
 				
@@ -99,8 +98,10 @@ eclipse {
     }
     classpath{
        	downloadSources=true
+        downloadJavadoc=true
     	
-    	containers.clear()
+        //plusConfigurations << sourceSets.test.java
+
     	containers
             .add('org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7')
     	file{
@@ -111,6 +112,10 @@ eclipse {
     		}
     		whenMerged { classpath ->
         		classpath.entries.findAll { entry -> entry.kind == 'lib' && entry.path.contains('junit') }*.exported = false
+                
+                //remove exlcude filter inorder to let junit test running inside Eclipse IDE
+                def src  = classpath.entries.find { entry -> entry.kind == 'src'}
+                src.excludes = []
     		}
     	}
     }
