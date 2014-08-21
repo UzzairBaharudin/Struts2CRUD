@@ -16,8 +16,11 @@ public class InMemoryEmployeeDao implements EmployeeDao {
 		employees = new ArrayList<Employee>();
 		employees.add(new Employee(1, "John", "Doe", 36, new Department(100,
 				"Accounting")));
-		employees.add(new Employee(2, "Bob", "Smith", 25, new Department(300,
+		employees.add(new Employee(2, "Charles", "Pao", 32, new Department(200,
+				"R & D")));
+		employees.add(new Employee(3, "Bob", "Smith", 25, new Department(300,
 				"Sales")));
+		
 		DepartmentDao deptDao = new InMemoryDepartmentDao();
 		departmentsMap = deptDao.getDepartmentsMap();
 	}
